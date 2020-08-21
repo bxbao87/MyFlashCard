@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Categories {
     String Name;
-    ArrayList<Question> Quest;
+    ArrayList<String> ListQuestions;
 
-    public Categories(String name, ArrayList<Question> quest) {
+    public Categories(String name, ArrayList<String> quest) {
         Name = name;
-        Quest = quest;
+        ListQuestions = quest;
     }
 }

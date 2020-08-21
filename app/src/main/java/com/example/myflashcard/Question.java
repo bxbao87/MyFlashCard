@@ -1,22 +1,66 @@
 package com.example.myflashcard;
 
-import java.util.ArrayList;
+import android.graphics.Bitmap;
 
-enum questionType {
-    MULTIPLE_CHOICE,
-    SINGLE_ANSWER;
-}
+import java.util.ArrayList;
+//
+//enum questionType {
+//    MULTIPLE_CHOICE,
+//    SINGLE_ANSWER;
+//}
 
 public class Question {
-    questionType type;
-    String name;
+    String qname;
     String hint;
-    String Key;                 //correct answer to check with
+    String key;                 //correct answer to check with
+    Bitmap questionImage;
+    boolean isImageQuestion;
 
-    public Question(questionType type, String name, String hint, String key) {
-        this.type = type;
-        this.name = name;
+    public Question(String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion) {
+        this.qname = qname;
         this.hint = hint;
-        this.Key = key;
+        this.key = key;
+        this.questionImage = questionImage;
+        this.isImageQuestion = isImageQuestion;
+    }
+
+    public String getQname() {
+        return qname;
+    }
+
+    public void setQname(String qname) {
+        this.qname = qname;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Bitmap getQuestionImage() {
+        return questionImage;
+    }
+
+    public void setQuestionImage(Bitmap questionImage) {
+        this.questionImage = questionImage;
+    }
+
+    public boolean isImageQuestion() {
+        return isImageQuestion;
+    }
+
+    public void setImageQuestion(boolean imageQuestion) {
+        isImageQuestion = imageQuestion;
     }
 }
