@@ -17,12 +17,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ArrayList<String> nameImage = new ArrayList<>();
+        nameImage.add("Rat");
+        nameImage.add("Cat");
+        nameImage.add("Dog");
+        nameImage.add("Pig");
         nameImage.add("Rat.png");
         nameImage.add("Cat.png");
         nameImage.add("Dog.png");
         nameImage.add("Pig.png");
 
-        Question x = new MultiChoice_Quest(MULTIPLE_CHOICE, "Who is Doraemon ?", "Doraemon hates mouse a lot !", nameImage, true, false);
+        String key = "Cat";
+
+        Question x = new MultiChoice_Quest(MULTIPLE_CHOICE, "Who is Doraemon ?", "Doraemon hates mouse a lot !", key, nameImage, true, false);
 
         ArrayList<Question> arrayQuest = new ArrayList<>();
         arrayQuest.add(x);
