@@ -9,25 +9,26 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends BaseAdapter {
-    ArrayList<Categories> CategoryList;
+public class QuestionChoiceAdapter extends BaseAdapter {
+
+    ArrayList<String> QuestionList;
     Context context;
     int itemLayout;
 
-    public CategoryAdapter(ArrayList<Categories> categoryList, Context context, int itemLayout) {
-        CategoryList = categoryList;
+    public QuestionChoiceAdapter(ArrayList<String> questionList, Context context, int itemLayout) {
+        QuestionList = questionList;
         this.context = context;
         this.itemLayout = itemLayout;
     }
 
     @Override
     public int getCount() {
-        return CategoryList.size();
+        return QuestionList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return CategoryList.get(i);
+        return QuestionList.get(i);
     }
 
     @Override
@@ -35,33 +36,31 @@ public class CategoryAdapter extends BaseAdapter {
         return 0;
     }
 
-    class viewHolderCategory {
-        TextView name;
+    private class viewHolderQuestion {
+        TextView QuestionNumber;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (CategoryList.size() <= 0) return view;
+        if (QuestionList.size() <= 0) return view;
 
-        viewHolderCategory holder;
+
+        viewHolderQuestion holder;
 
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(itemLayout, null);
 
-            holder = new viewHolderCategory();
-            holder.name = (TextView) view.findViewById(R.id.CategoriesName);
+            holder = new viewHolderQuestion();
+            holder.QuestionNumber = (TextView) view.findViewById(R.id.QuestionNumber);
 
             view.setTag(holder);
         }
         else {
-            holder = (viewHolderCategory) view.getTag();
+            holder = (viewHolderQuestion) view.getTag();
         }
 
-
-        Categories unit = CategoryList.get(i);
-
-        holder.name.setText(unit.getName());
+        holder.QuestionNumber.setText(Integer.toString(i));
 
         return view;
     }

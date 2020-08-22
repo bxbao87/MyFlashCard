@@ -17,12 +17,56 @@
             </intent-filter>
         </activity>
 
+
         <activity android:name=".CategoryActivity"
-            android:label="Category"
-            android:parentActivityName=".MainActivity">
+            android:label="Explore"
+            android:parentActivityName=".CategoryActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myflashcard.CategoryActivity" />
+                android:value="com.example.myflashcard.MainActivity" />
+        </activity>
+
+
+        <activity android:name=".QuestionChoiceActivity"
+            android:label="Treasure"
+            android:parentActivityName=".QuestionChoiceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myflashcard.MainActivity" />
+        </activity>
+
+
+
+        <activity android:name=".MultipleChoiceQuestionActivity"
+            android:label="Gold coin"
+            android:parentActivityName=".MultipleChoiceQuestionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myflashcard.MainActivity" />
+        </activity>
+
+        <activity android:name=".Image_MultipleChoiceQuestionActivity"
+            android:label="Gold coin"
+            android:parentActivityName=".Image_MultipleChoiceQuestionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myflashcard.MainActivity" />
+        </activity>
+
+        <activity android:name=".SingleAnswerQuestionActivity"
+            android:label="Gold coin"
+            android:parentActivityName=".SingleAnswerQuestionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myflashcard.MainActivity" />
+        </activity>
+
+        <activity android:name=".Image_SingleAnswerQuestionActivity"
+            android:label="Gold coin"
+            android:parentActivityName=".Image_SingleAnswerQuestionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.myflashcard.MainActivity" />
         </activity>
     </application>
 

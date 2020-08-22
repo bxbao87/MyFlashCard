@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <!--android:background="#D769F0C1"-->
+    <ImageView
+        android:id="@+id/chest"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/treasure_chest_closed_254x254"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/QuestionNumber"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:text="Question number"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textColor="#D3FF6E40"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFF00"
+        android:layout_marginTop="66dp"
+        />
+
+</RelativeLayout>
