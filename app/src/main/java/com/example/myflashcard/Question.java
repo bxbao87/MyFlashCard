@@ -75,11 +75,14 @@ public class Question implements Serializable {
         this.questionImage = questionImage;
     }
 
-    public boolean isImageQuestion() {
+    public boolean getIsImageQuestion() {
         return isImageQuestion;
     }
 
     public void setImageQuestion(boolean imageQuestion) {
         isImageQuestion = imageQuestion;
     }
+
+    public abstract boolean checkAnswer(String answer);
+
 }

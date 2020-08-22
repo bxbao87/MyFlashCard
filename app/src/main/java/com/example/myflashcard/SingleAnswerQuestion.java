@@ -17,4 +17,9 @@ public class SingleAnswerQuestion extends Question {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
+    @Override
+    public boolean checkAnswer(String answer) {
+        return false;
+    }
 }
