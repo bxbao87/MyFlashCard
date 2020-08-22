@@ -5,13 +5,22 @@
     android:layout_height="match_parent"
     android:background="#8640C4FF">
 
+    <Button
+        android:id="@+id/hintBtn"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/icons8_info_200"
+        android:layout_alignParentRight="true"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/hintBtn"
         android:text="Question Content"
         android:gravity="center"
         android:textSize="22sp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/QuestionName"
         />
 
@@ -25,6 +34,7 @@
         />
 
     <GridView
+        android:id="@+id/AnswerGridView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

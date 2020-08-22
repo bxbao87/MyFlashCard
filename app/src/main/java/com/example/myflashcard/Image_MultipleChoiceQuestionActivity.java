@@ -3,6 +3,10 @@ package com.example.myflashcard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,16 +15,53 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
 
-    Question CurrenQuestion;
+    MultipleChoiceQuestion CurrentQuestion;
     ImageView QuestionImage;
     TextView QuestionContent;
+    GridView gridView;
+    ImageAnswerAdapter ImageAdapter;
+    TextAnswerAdapter TextAdapter;
+    Button BtnHint;
+    Button BtnCheck;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.image_multiplechoice_quesion);
 
+        initComponent();
+
         Intent intent = getIntent();
-        CurrenQuestion = (Question) intent.getSerializableExtra("CurrentQuestion");
+        CurrentQuestion = (MultipleChoiceQuestion) intent.getSerializableExtra("CurrentQuestion");
+
+
+        display();
+
+
+        //pressAnswer();
+
+    }
+
+    private void display() {
+        if (CurrentQuestion.isImageChoice == true){
+            ImageAdapter = new ImageAnswerAdapter(Image_MultipleChoiceQuestionActivity.this,
+                    R.layout.image_answer, CurrentQuestion.AnswerImage, CurrentQuestion.Answer);
+            gridView.setAdapter(ImageAdapter);
+        }
+        else {
+            TextAdapter = new TextAnswerAdapter(Image_MultipleChoiceQuestionActivity.this, R.layout.text_answer, CurrentQuestion.Answer);
+            gridView.setAdapter(TextAdapter);
+        }
+
+        QuestionContent.setText(CurrentQuestion.getQname());
+        QuestionImage.setImageBitmap(CurrentQuestion.getQuestionImage());
+    }
+
+    private void initComponent() {
+        BtnCheck = findViewById(R.id.checkBtn);
+        BtnHint = findViewById(R.id.hintBtn);
+        QuestionImage = findViewById(R.id.ImageOfQuestion);
+        QuestionContent = findViewById(R.id.QuestionName);
+        gridView = findViewById(R.id.QuestionGridView);
     }
 }

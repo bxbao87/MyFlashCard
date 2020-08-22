@@ -8,9 +8,11 @@
     <TextView
         android:id="@+id/Answer"
         android:layout_width="185dp"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:text="Answer"
         android:textSize="24sp"
         android:gravity="center"
+        android:background="#CDB2FF59"
+        android:textColor="#CC3EE4"
         />
 </RelativeLayout>
