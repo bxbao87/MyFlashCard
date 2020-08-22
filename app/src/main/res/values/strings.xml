@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MyFlashCard</string>
+    <string-array name="user_category">
+        <item>Geography</item>
+        <item>History</item>
+        <item>Science</item>
+        <item>Technology</item>
+        <item>Engineer</item>
+        <item>Math</item>
+    </string-array>
 </resources>
