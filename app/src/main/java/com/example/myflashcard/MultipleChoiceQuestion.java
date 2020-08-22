@@ -42,4 +42,9 @@ public class MultipleChoiceQuestion extends Question {
     public void setImageChoice(boolean imageChoice) {
         isImageChoice = imageChoice;
     }
+
+    @Override
+    public boolean checkAnswer(String answer) {
+        return answer.equals(key);
+    }
 }

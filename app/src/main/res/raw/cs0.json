@@ -1,0 +1,16 @@
+{
+  "type": 0,
+  "question": "Điện thoại Iphone sử dụng hệ điều hành gì?",
+  "isImageQuestion": true,
+  "questionImagePath": "iphone",
+  "answer": [
+    "IOS",
+    "Android",
+    "Window",
+    "FirefoxOS"
+  ],
+  "isImageChoice": false,
+  "answerImagePath": [],
+  "hint": "Không phải hệ điều hành điện thoại của bạn đâu",
+  "key": "IOS"
+}

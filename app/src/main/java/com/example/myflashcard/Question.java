@@ -9,7 +9,7 @@ import java.util.ArrayList;
 //    SINGLE_ANSWER;
 //}
 
-public class Question {
+public abstract class Question {
     String qname;
     String hint;
     String key;                 //correct answer to check with
@@ -56,11 +56,14 @@ public class Question {
         this.questionImage = questionImage;
     }
 
-    public boolean isImageQuestion() {
+    public boolean getIsImageQuestion() {
         return isImageQuestion;
     }
 
     public void setImageQuestion(boolean imageQuestion) {
         isImageQuestion = imageQuestion;
     }
+
+    public abstract boolean checkAnswer(String answer);
+
 }

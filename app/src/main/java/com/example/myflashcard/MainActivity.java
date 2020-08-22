@@ -3,7 +3,9 @@ package com.example.myflashcard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,41 +13,27 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-
-
     private Button BtnExplore;
     private Button BtnCustom;
-    private ArrayList<Categories> CategoryList;
-
+    
+    private LoadWriteData fileController = new LoadWriteData(this);
+    
+    private ArrayList<Categories> CategoryList = new ArrayList<>();
+    
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        ArrayList<String> nameImage = new ArrayList<>();
-//        nameImage.add("Rat");
-//        nameImage.add("Cat");
-//        nameImage.add("Dog");
-//        nameImage.add("Pig");
-//        nameImage.add("Rat.png");
-//        nameImage.add("Cat.png");
-//        nameImage.add("Dog.png");
-//        nameImage.add("Pig.png");
-//
-//        String key = "Cat";
-//
-//        Question x = new MultipleChoiceQuestion(MULTIPLE_CHOICE, "Who is Doraemon ?", "Doraemon hates mouse a lot !", key, nameImage, true, false);
-//
-//        ArrayList<Question> arrayQuest = new ArrayList<>();
-//        arrayQuest.add(x);
-//
-//        Categories y = new Categories("Japan", arrayQuest);
-
+        LoadData(); // always load data first MrX to make sure no leaking
         initButton();
-
         PressExplore();
+    }
 
-        initDataDum();
+
+    private void LoadData() {
+        CategoryList = fileController.loadSystemCategories();
     }
 
     private void initDataDum() {

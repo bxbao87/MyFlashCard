@@ -1,0 +1,47 @@
+[
+  {
+    "id": 0,
+    "name": "CS",
+    "filename": [
+      "cs0",
+      "cs1",
+      "cs2"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Flag",
+    "filename": [
+      "flag0",
+      "flag1",
+      "flag2"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Math",
+    "filename": [
+      "math0",
+      "math1",
+      "math2"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Geography",
+    "filename": [
+      "geography0",
+      "geography1",
+      "geography2"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Culture",
+    "filename": [
+      "culture0",
+      "culture1",
+      "culture2"
+    ]
+  }
+]
