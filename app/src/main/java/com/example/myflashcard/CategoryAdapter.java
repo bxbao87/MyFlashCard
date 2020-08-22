@@ -61,7 +61,7 @@ public class CategoryAdapter extends BaseAdapter {
 
         Categories unit = CategoryList.get(i);
 
-        holder.name.setText(unit.getName());
+        holder.name.setText("  " + unit.getName());
 
         return view;
     }

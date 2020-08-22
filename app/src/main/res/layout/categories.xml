@@ -3,14 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8640C4FF">
-
+    android:background="@drawable/sky">
+    <!--android:background="#8640C4FF"-->
     <GridView
         android:id="@+id/CategoriesGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         />
 
 

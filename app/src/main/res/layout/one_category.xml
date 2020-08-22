@@ -10,6 +10,9 @@
         android:layout_height="70dp"
         android:text="Category"
         android:textSize="26sp"
+        android:textColor="#ffff"
+        android:background="#8640C4FF"
+        android:gravity="center_vertical"
         />
 
 </RelativeLayout>
