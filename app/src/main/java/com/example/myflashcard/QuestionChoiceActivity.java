@@ -3,6 +3,8 @@ package com.example.myflashcard;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import androidx.annotation.Nullable;
@@ -26,6 +28,50 @@ public class QuestionChoiceActivity extends AppCompatActivity {
 
         adapter = new QuestionChoiceAdapter(CategoryItem.getListQuestions(), QuestionChoiceActivity.this, R.layout.one_quesion);
         gridView.setAdapter(adapter);
+
+
+        pressQuestionItem();
+    }
+
+    private void pressQuestionItem() {
+        gridView.setOnItemClickListener(new GridView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Question CurrentQuestion = new Question(1, "Who is Doraemon", "hint", "Cat", null, false);
+                /*TODO
+                    Load & store data: load Question i th from the current category
+                                       Store content of Question ith to CurrentQuestion
+                */
+
+                Intent intent;
+
+                if (CurrentQuestion.getType() == 0) {
+                    //Multiple question question
+
+                    if (CurrentQuestion.isImageQuestion == true) {
+                        intent = new Intent(QuestionChoiceActivity.this, Image_MultipleChoiceQuestionActivity.class);
+                    }
+                    else {
+                        intent = new Intent(QuestionChoiceActivity.this, MultipleChoiceQuestionActivity.class);
+                    }
+                }
+                else {
+                    //Single answer question
+
+                    if (CurrentQuestion.isImageQuestion == true) {
+                        intent = new Intent(QuestionChoiceActivity.this, Image_SingleAnswerQuestionActivity.class);
+                    }
+                    else {
+                        intent = new Intent(QuestionChoiceActivity.this, SingleAnswerQuestionActivity.class);
+                    }
+                }
+
+                intent.putExtra("CurrentQuestion", CurrentQuestion);
+
+                startActivity(intent);
+
+            }
+        });
     }
 
     private void initGridView() {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8640C4FF">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Question Content"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:layout_marginTop="40dp"
+        android:id="@+id/QuestionName"
+        />
+
+    <ImageView
+        android:id="@+id/ImageOfQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_below="@+id/QuestionName"
+        android:src="@drawable/vnd"
+        android:layout_marginTop="20dp"
+        />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/ImageOfQuestion"
+        android:layout_marginTop="40dp"
+        android:numColumns="2"
+        />
+</RelativeLayout>
