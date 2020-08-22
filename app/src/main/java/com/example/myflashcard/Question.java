@@ -83,6 +83,8 @@ public class Question implements Serializable {
         isImageQuestion = imageQuestion;
     }
 
-    public abstract boolean checkAnswer(String answer);
+    public boolean checkAnswer(String answer) {
+        return false;
+    }
 
 }

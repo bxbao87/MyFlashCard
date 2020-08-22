@@ -24,8 +24,9 @@ public class Categories implements Serializable {
     public Categories(String name, ArrayList<String> quest) {
         Name = name;
         ListQuestions = quest;
+    }
 
-    public Categories(String name, ArrayList<String> listQuestions, int id) {
+        Categories(String name, ArrayList<String> listQuestions, int id) {
         this.Name = name;
         this.ListQuestions = listQuestions;
         this.id = id;
@@ -41,7 +42,7 @@ public class Categories implements Serializable {
     }
 
     public Categories(int categoryID, String name, ArrayList<String> listQuestions) {
-        CategoryID = categoryID;
+        id = categoryID;
         Name = name;
         ListQuestions = listQuestions;
     }
