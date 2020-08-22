@@ -6,9 +6,10 @@
     android:background="#8640C4FF">
 
     <GridView
-        android:id="@+id/CategoriesList"
+        android:id="@+id/CategoriesListMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
         />
 
 
