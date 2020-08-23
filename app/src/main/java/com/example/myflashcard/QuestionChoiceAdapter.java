@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,11 +15,13 @@ public class QuestionChoiceAdapter extends BaseAdapter {
     ArrayList<String> QuestionList;
     Context context;
     int itemLayout;
+    ArrayList<Boolean> chestState;
 
-    public QuestionChoiceAdapter(ArrayList<String> questionList, Context context, int itemLayout) {
+    public QuestionChoiceAdapter(ArrayList<String> questionList, Context context, int itemLayout, ArrayList<Boolean> chestState) {
         QuestionList = questionList;
         this.context = context;
         this.itemLayout = itemLayout;
+        this.chestState = chestState;
     }
 
     @Override
@@ -38,6 +41,7 @@ public class QuestionChoiceAdapter extends BaseAdapter {
 
     private class viewHolderQuestion {
         TextView QuestionNumber;
+        ImageView ChestState;
     }
 
     @Override
@@ -53,6 +57,7 @@ public class QuestionChoiceAdapter extends BaseAdapter {
 
             holder = new viewHolderQuestion();
             holder.QuestionNumber = (TextView) view.findViewById(R.id.QuestionNumber);
+            holder.ChestState = (ImageView) view.findViewById(R.id.chest);
 
             view.setTag(holder);
         }
@@ -61,6 +66,10 @@ public class QuestionChoiceAdapter extends BaseAdapter {
         }
 
         holder.QuestionNumber.setText(Integer.toString(i));
+
+        if (chestState.get(i) == true){
+            holder.ChestState.setImageResource(R.drawable.treasure_chest_open_254x254);
+        }
 
         return view;
     }

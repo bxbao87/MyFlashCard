@@ -10,13 +10,15 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 
 public class QuestionChoiceActivity extends AppCompatActivity {
     private Categories CategoryItem;
     private GridView gridView;
     private QuestionChoiceAdapter adapter;
     private TextView Slogan;
-
+    private ArrayList<Boolean> isChestOpen;
     LoadWriteData fileController = new LoadWriteData(this);
 
     @Override
@@ -31,13 +33,22 @@ public class QuestionChoiceActivity extends AppCompatActivity {
         display();
     }
 
+    private void checkChestAllChecked() {
+        for (int i = 0; i < CategoryItem.getListQuestions().size(); ++i){
+            if (isChestOpen.get(i) == false){
+                return;
+            }
+        }
+        Slogan.setText("     Yas, you got it !");
+    }
+
     private void getDataFromIntent() {
         Intent intent = getIntent();
         CategoryItem = (Categories) intent.getSerializableExtra("CategoryItem");
     }
 
     private void createAdapter(){
-        adapter = new QuestionChoiceAdapter(CategoryItem.getListQuestions(), QuestionChoiceActivity.this, R.layout.one_quesion);
+        adapter = new QuestionChoiceAdapter(CategoryItem.getListQuestions(), QuestionChoiceActivity.this, R.layout.one_quesion, isChestOpen);
         gridView.setAdapter(adapter);
     }
 
@@ -50,6 +61,11 @@ public class QuestionChoiceActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Question CurrentQuestion = fileController.LoadPlayQuestion(CategoryItem.getListQuestions().get(i));
+
+                isChestOpen.set(i, true);
+                adapter.notifyDataSetChanged();
+                gridView.setAdapter(adapter);
+                checkChestAllChecked();
 
                 Intent intent;
                 if (CurrentQuestion.getType() == 0) {
@@ -78,6 +94,10 @@ public class QuestionChoiceActivity extends AppCompatActivity {
     }
 
     private void initGridView() {
+        isChestOpen = new ArrayList<>();
+        for (int i = 0; i < CategoryItem.getListQuestions().size(); ++i){
+            isChestOpen.add(false);
+        }
         Slogan = (TextView) findViewById(R.id.slogan);
         gridView = findViewById(R.id.QuestionGridView);
     }
