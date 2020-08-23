@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,8 @@ public class QuestionChoiceActivity extends AppCompatActivity {
     private Categories CategoryItem;
     private GridView gridView;
     private QuestionChoiceAdapter adapter;
+    private TextView Slogan;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,13 @@ public class QuestionChoiceActivity extends AppCompatActivity {
         adapter = new QuestionChoiceAdapter(CategoryItem.getListQuestions(), QuestionChoiceActivity.this, R.layout.one_quesion);
         gridView.setAdapter(adapter);
 
+        display();
 
         pressQuestionItem();
+    }
+
+    private void display() {
+        Slogan.setText("    Oh easy " + CategoryItem.getName() + ", \n          Let's get them all !" );
     }
 
     private void pressQuestionItem() {
@@ -75,6 +83,7 @@ public class QuestionChoiceActivity extends AppCompatActivity {
     }
 
     private void initGridView() {
+        Slogan = (TextView) findViewById(R.id.slogan);
         gridView = findViewById(R.id.QuestionGridView);
     }
 }

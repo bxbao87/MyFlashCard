@@ -1,33 +1,36 @@
 package com.example.myflashcard;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CategoryAdapter extends BaseAdapter {
-    ArrayList<Categories> CategoryList;
+public class TextAnswerAdapter extends BaseAdapter {
     Context context;
     int itemLayout;
+    ArrayList<String> ListAnswer;
 
-    public CategoryAdapter(ArrayList<Categories> categoryList, Context context, int itemLayout) {
-        CategoryList = categoryList;
+    public TextAnswerAdapter(Context context, int itemLayout, ArrayList<String> listAnswer) {
         this.context = context;
         this.itemLayout = itemLayout;
+        ListAnswer = listAnswer;
     }
 
     @Override
     public int getCount() {
-        return CategoryList.size();
+        return ListAnswer.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return CategoryList.get(i);
+        return ListAnswer.get(i);
     }
 
     @Override
@@ -35,33 +38,33 @@ public class CategoryAdapter extends BaseAdapter {
         return 0;
     }
 
-    class viewHolderCategory {
-        TextView name;
+    class viewHolderTextAnswer {
+        TextView answer;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if (CategoryList.size() <= 0) return view;
+        if (ListAnswer.size() <= 0) return view;
 
-        viewHolderCategory holder;
+        viewHolderTextAnswer holder;
 
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(itemLayout, null);
 
-            holder = new viewHolderCategory();
-            holder.name = (TextView) view.findViewById(R.id.CategoriesName);
+            holder = new viewHolderTextAnswer();
+            holder.answer = (TextView) view.findViewById(R.id.Answer);
 
             view.setTag(holder);
         }
         else {
-            holder = (viewHolderCategory) view.getTag();
+            holder = (viewHolderTextAnswer) view.getTag();
         }
 
 
-        Categories unit = CategoryList.get(i);
+        String AnswerUnit = ListAnswer.get(i);
 
-        holder.name.setText("  " + unit.getName());
+        holder.answer.setText(AnswerUnit);
 
         return view;
     }
