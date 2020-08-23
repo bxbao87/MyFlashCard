@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7041B6EA">
+    android:background="#64FFDA">
 
 
     <ImageView
         android:id="@+id/ImageOfAnswer"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="110dp"
         android:src="@drawable/vnd"
         />
 
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/ImageOfAnswer"
         android:text="Answer"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:background="#FFAB40"
         android:textColor="#ffff"

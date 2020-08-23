@@ -33,7 +33,7 @@
         android:layout_marginTop="340dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:hint="  Your nswer"
+        android:hint="  Your answer"
         android:textSize="24sp"
         android:background="#ffff"
         />
