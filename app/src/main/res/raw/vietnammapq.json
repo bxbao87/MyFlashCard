@@ -11,10 +11,10 @@
   ],
   "isImageChoice": true,
   "answerImagePath": [
-    "MalaysiaMap",
-    "JapanMap",
-    "VietnamMap",
-    "PhilippinesMap"
+    "malaysiamap",
+    "japanmap",
+    "vietnammap",
+    "philippinesmap"
   ],
   "hint": "Vietnam country have the shape of S !",
   "key": "C"

@@ -3,20 +3,15 @@ package com.example.myflashcard;
 import android.graphics.Bitmap;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-//
-//enum questionType {
-//    MULTIPLE_CHOICE,
-//    SINGLE_ANSWER;
-//}
+
 
 public class Question implements Serializable {
-    int type;
-    String qname;
-    String hint;
-    String key;                 //correct answer to check with
-    Bitmap questionImage;
-    boolean isImageQuestion;
+    private int type;
+    private String qname;
+    private String hint;
+    private String key;                 //correct answer to check with
+    private Bitmap questionImage;
+    private boolean isImageQuestion;
 
     public int getType() {
         return type;
@@ -28,14 +23,6 @@ public class Question implements Serializable {
 
     public Question(int type, String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion) {
         this.type = type;
-        this.qname = qname;
-        this.hint = hint;
-        this.key = key;
-        this.questionImage = questionImage;
-        this.isImageQuestion = isImageQuestion;
-    }
-
-    public Question(String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion) {
         this.qname = qname;
         this.hint = hint;
         this.key = key;
@@ -81,10 +68,6 @@ public class Question implements Serializable {
 
     public void setImageQuestion(boolean imageQuestion) {
         isImageQuestion = imageQuestion;
-    }
-
-    public boolean checkAnswer(String answer) {
-        return false;
     }
 
 }

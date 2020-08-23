@@ -2,7 +2,7 @@
   "type": 0,
   "question": "What is the main kind of transportation in Denmark ?",
   "isImageQuestion": true,
-  "questionImagePath": "TeslaCar",
+  "questionImagePath": "teslacar",
   "answer": [
     "Bus and subway",
     "Gas Car",

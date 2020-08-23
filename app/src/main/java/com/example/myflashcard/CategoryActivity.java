@@ -26,20 +26,21 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories);
 
+        getDataFromIntent();
         initGridView();
 
+        createAdapter();
+        pressCategoryItem();
+    }
+
+    void getDataFromIntent(){
         Intent intent = getIntent();
         CategoryList = (ArrayList<Categories>) intent.getSerializableExtra("CategoryList");
+    }
 
-        Toast.makeText(this, "second act", Toast.LENGTH_SHORT).show();
-
-
+    void createAdapter(){
         adapter = new CategoryAdapter(CategoryList, CategoryActivity.this, R.layout.one_category);
         gridView.setAdapter(adapter);
-
-
-        pressCategoryItem();
-
     }
 
     private void pressCategoryItem() {

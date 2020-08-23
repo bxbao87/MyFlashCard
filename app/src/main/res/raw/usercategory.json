@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "My Science",
+    "filename": []
+  },
+  {
+    "id": 1,
+    "name": "My Technology",
+    "filename": []
+  },
+  {
+    "id": 2,
+    "name": "My Engineering",
+    "filename": []
+  },
+  {
+    "id": 3,
+    "name": "My Math",
+    "filename": []
+  },
+  {
+    "id": 4,
+    "name": "My Geography",
+    "filename": []
+  },
+  {
+    "id": 5,
+    "name": "My History",
+    "filename": []
+  }
+]

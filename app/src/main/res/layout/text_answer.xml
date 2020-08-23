@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="25dp">
 
-    <TextView
-        android:id="@+id/Answer"
-        android:layout_width="185dp"
-        android:layout_height="120dp"
-        android:text="Answer"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:background="#CDB2FF59"
-        android:textColor="#CC3EE4"
-        />
+        <TextView
+            android:id="@+id/Answer"
+            android:layout_width="185dp"
+            android:layout_height="120dp"
+            android:text="Answer"
+            android:textSize="24sp"
+            android:gravity="center"
+            android:background="#CDB2FF59"
+            android:textColor="#CC3EE4"
+            />
+
+    </androidx.cardview.widget.CardView>
+
 </RelativeLayout>

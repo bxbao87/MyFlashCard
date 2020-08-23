@@ -2,11 +2,13 @@ package com.example.myflashcard;
 
 import android.graphics.Bitmap;
 
-public class SingleAnswerQuestion extends Question {
-    String answer;
+import java.io.Serializable;
 
-    public SingleAnswerQuestion(String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion, String answer) {
-        super(qname, hint, key, questionImage, isImageQuestion);
+public class SingleAnswerQuestion extends Question implements Serializable {
+    private String answer;
+
+    public SingleAnswerQuestion(int type, String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion, String answer) {
+        super(type, qname, hint, key, questionImage, isImageQuestion);
         this.answer = answer;
     }
 
@@ -18,8 +20,4 @@ public class SingleAnswerQuestion extends Question {
         this.answer = answer;
     }
 
-    @Override
-    public boolean checkAnswer(String answer) {
-        return false;
-    }
 }

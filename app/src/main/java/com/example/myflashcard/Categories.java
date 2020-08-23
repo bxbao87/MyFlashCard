@@ -4,20 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Categories implements Serializable {
-
-    private String Name; // user can interact with this
-    private ArrayList<String> ListQuestions; // system interact only
-    private int id; // system interact only
-
+    int CategoryID;
+    String Name;
+    ArrayList<String> ListQuestions;
 
     public Categories(String name) {
         Name = name;
         ListQuestions = null;
     }
 
-
     public Categories(int categoryID, String name) {
-        id = categoryID;
+        CategoryID = categoryID;
         Name = name;
     }
 
@@ -26,27 +23,20 @@ public class Categories implements Serializable {
         ListQuestions = quest;
     }
 
-        Categories(String name, ArrayList<String> listQuestions, int id) {
-        this.Name = name;
-        this.ListQuestions = listQuestions;
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-
-    }
 
     public Categories(int categoryID, String name, ArrayList<String> listQuestions) {
-        id = categoryID;
+        CategoryID = categoryID;
         Name = name;
         ListQuestions = listQuestions;
     }
 
+    public int getCategoryID() {
+        return CategoryID;
+    }
+
+    public void setCategoryID(int categoryID) {
+        CategoryID = categoryID;
+    }
 
     public String getName() {
         return Name;

@@ -2,7 +2,7 @@
   "type": 0,
   "question": "What is the personal income tax rate in Denmark? (in percentage)",
   "isImageQuestion": true,
-  "questionImagePath": "EuroMoney",
+  "questionImagePath": "euromoney",
   "answer": [
     "39",
     "29",

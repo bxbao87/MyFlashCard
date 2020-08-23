@@ -2,19 +2,20 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#7041B6EA">
 
 
     <ImageView
         android:id="@+id/ImageOfAnswer"
-        android:layout_width="185dp"
+        android:layout_width="match_parent"
         android:layout_height="160dp"
         android:src="@drawable/vnd"
         />
 
     <TextView
         android:id="@+id/Answer"
-        android:layout_width="185dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ImageOfAnswer"
         android:text="Answer"
@@ -23,4 +24,5 @@
         android:background="#FFAB40"
         android:textColor="#ffff"
         />
+
 </RelativeLayout>

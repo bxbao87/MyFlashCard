@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
+    LoadWriteData fileController = new LoadWriteData(this);
 
     MultipleChoiceQuestion CurrentQuestion;
     ImageView QuestionImage;
@@ -35,29 +35,30 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
     Dialog PopUpWrong;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.image_multiplechoice_quesion);
 
+        getDataFromIntent();
+
         initComponent();
-
-        Intent intent = getIntent();
-        CurrentQuestion = (MultipleChoiceQuestion) intent.getSerializableExtra("CurrentQuestion");
-
-
-        display();
-
-
         pressAnswer();
-
         pressHint();
+        display();
+    }
+
+    private void getDataFromIntent() {
+        Intent intent = getIntent();
+        String filename = intent.getStringExtra("CurrentQuestion");
+        CurrentQuestion = (MultipleChoiceQuestion) fileController.LoadPlayQuestion(filename);
     }
 
     private void pressAnswer() {
         gridView.setOnItemClickListener(new GridView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (CurrentQuestion.getAnswer().get(i).toString().compareTo(CurrentQuestion.getKey()) == 0){
+                if (CurrentQuestion
+                        .getAnswer().get(i).toString().compareTo(CurrentQuestion.getKey()) == 0){
                     showCorrect();
                 }
                 else {
@@ -67,8 +68,8 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
         });
     }
 
-
     private void showWrong() {
+        PopUpWrong = new Dialog(this);
         PopUpWrong.setContentView(R.layout.popup_wronganswer);
         BtnCloseWrong = PopUpWrong.findViewById(R.id.doneBtn);
 
@@ -84,6 +85,7 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
     }
 
     private void showCorrect() {
+        PopUpCorrect = new Dialog(this);
         PopUpCorrect.setContentView(R.layout.popup_correctanswer);
         BtnCloseCorrect = PopUpCorrect.findViewById(R.id.doneBtn);
 
@@ -109,6 +111,7 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
     }
 
     private void showHint() {
+        PopUpHint = new Dialog(this);
         PopUpHint.setContentView(R.layout.popup_hint);
         BtnCloseHint = PopUpHint.findViewById(R.id.doneBtn);
         HintContent = PopUpHint.findViewById(R.id.hintContent);
@@ -132,13 +135,13 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
     }
 
     private void display() {
-        if (CurrentQuestion.isImageChoice == true){
+        if (CurrentQuestion.getIsImageChoice() == true){
             ImageAdapter = new ImageAnswerAdapter(Image_MultipleChoiceQuestionActivity.this,
-                    R.layout.image_answer, CurrentQuestion.AnswerImage, CurrentQuestion.Answer);
+                    R.layout.image_answer, CurrentQuestion.getAnswerImage(), CurrentQuestion.getAnswer());
             gridView.setAdapter(ImageAdapter);
         }
         else {
-            TextAdapter = new TextAnswerAdapter(Image_MultipleChoiceQuestionActivity.this, R.layout.text_answer, CurrentQuestion.Answer);
+            TextAdapter = new TextAnswerAdapter(Image_MultipleChoiceQuestionActivity.this, R.layout.text_answer, CurrentQuestion.getAnswer());
             gridView.setAdapter(TextAdapter);
         }
 
@@ -150,6 +153,6 @@ public class Image_MultipleChoiceQuestionActivity extends AppCompatActivity {
         BtnHint = findViewById(R.id.hintBtn);
         QuestionImage = findViewById(R.id.ImageOfQuestion);
         QuestionContent = findViewById(R.id.QuestionName);
-        gridView = findViewById(R.id.QuestionGridView);
+        gridView = findViewById(R.id.AnswerGridView);
     }
 }

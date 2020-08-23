@@ -2,7 +2,7 @@
   "type": 0,
   "question": "What is the main and official language in Vienam?",
   "isImageQuestion": true,
-  "questionImagePath": "VietnamFlag",
+  "questionImagePath": "vietnamflag",
   "answer": [
     "Vietnamese",
     "Chinese",

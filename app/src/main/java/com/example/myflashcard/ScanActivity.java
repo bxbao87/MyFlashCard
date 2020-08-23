@@ -36,10 +36,10 @@ public class ScanActivity extends AppCompatActivity {
     private Bitmap imageBitmap;
     private String _textReturn = "";
     private int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.scan_activity);
 
         initComponents();
@@ -71,8 +71,6 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void receiveIntent() {
         Intent intent = getIntent();
@@ -149,7 +147,6 @@ public class ScanActivity extends AppCompatActivity {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Pick Image"), GALLERY_REQUEST_CODE_SCAN);
-
     }
 
     private void initComponents() {

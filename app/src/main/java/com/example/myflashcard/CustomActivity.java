@@ -1,11 +1,13 @@
 package com.example.myflashcard;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +20,10 @@ import java.io.IOException;
 
 public class CustomActivity extends AppCompatActivity {
     private Button create, addImage, scan, scan1, scan2;
-    private String currentPhotoPath;
     private Bitmap imageAdd;
     private String _question;
     private String _answer;
     private String _hint;
-    private String _category;
     private EditText editQuestion, editHint, editAnswer;
     static final int GALLERY_REQUEST_CODE = 12;
     static final int GET_QUESTION = 3;
@@ -31,43 +31,58 @@ public class CustomActivity extends AppCompatActivity {
     static final int GET_ANSWER = 7;
     private ImageView imageView;
     private Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.custom_activity);
+
         init();
         setScan();
         createNew();
     }
+
     private boolean isValidate(EditText t)
     {
-        if(t.getText().length() < 4)
+        if(t.getText().length() < 1)
         {
             t.setError("Invalid Input");
             return false;
         }
         return true;
     }
+
     private void createNew()
     {
         create.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("ResourceType")
             @Override
             public void onClick(View view) {
                 if(isValidate(editQuestion) && isValidate(editAnswer))
                 {
-                    //back to previous activity
-                    Intent intent = new Intent();
-                    intent.putExtra("Quest", _question);
-                    intent.putExtra("Image", imageAdd);
-                    intent.putExtra("Hint", _hint);
-                    intent.putExtra("Answer", _answer);
-                    intent.putExtra("Category", _category);
-                    setResult(Activity.RESULT_OK, intent);
+                    LoadWriteData fileController = new LoadWriteData(CustomActivity.this);
+
+                    boolean isImageQuestion=true;
+                    if(imageAdd==null)
+                        isImageQuestion=false;
+                    _question = editQuestion.getText().toString();
+                    _hint = editHint.getText().toString();
+                    _answer = editAnswer.getText().toString();
+
+                    SingleAnswerQuestion question = new SingleAnswerQuestion(
+                            1, _question, _hint, _answer,
+                            imageAdd, isImageQuestion, ""
+                    );
+
+                    fileController.createQuestion(spinner.getSelectedItemPosition(),question,imageAdd);
+
+                    setResult(Activity.RESULT_OK);
                     finish();
                 }
             }
         });
     }
+
     private void init() {
         imageView = findViewById(R.id.display_image);
 
@@ -90,6 +105,7 @@ public class CustomActivity extends AppCompatActivity {
             }
         });
     }
+
     private void setScan()
     {
         scan.setOnClickListener(new View.OnClickListener() {
@@ -117,6 +133,7 @@ public class CustomActivity extends AppCompatActivity {
             }
         });
     }
+
     private void getImageIntent() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -167,8 +184,5 @@ public class CustomActivity extends AppCompatActivity {
             }
         }
     }
-    private void getCategory()
-    {
-        _category = String.valueOf(spinner.getSelectedItem());
-    }
+
 }

@@ -2,18 +2,20 @@ package com.example.myflashcard;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MultipleChoiceQuestion extends Question {
+public class MultipleChoiceQuestion extends Question implements Serializable {
                                         // default all multiple_choice question have only 4 answer stored in Answer
-    ArrayList<String> Answer;           //Answers are text answer if isImageChoice if false
-    ArrayList<Bitmap> AnswerImage;
-    boolean isImageChoice;              //Answers are text and name of image answers when isImageChoice is true
-   // boolean haveImageContent;           //The last element of Answer is name of content image
+    private ArrayList<String> Answer;           //Answers are text answer if isImageChoice if false
+    private ArrayList<Bitmap> AnswerImage;
+    private boolean isImageChoice;              //Answers are text and name of image answers when isImageChoice is true
 
 
-    public MultipleChoiceQuestion(String qname, String hint, String key, Bitmap questionImage, boolean isImageQuestion, ArrayList<String> answer, ArrayList<Bitmap> answerImage, boolean isImageChoice) {
-        super(qname, hint, key, questionImage, isImageQuestion);
+    public MultipleChoiceQuestion(int type, String qname, String hint, String key, Bitmap questionImage,
+                                  boolean isImageQuestion, ArrayList<String> answer,
+                                  ArrayList<Bitmap> answerImage, boolean isImageChoice) {
+        super(type, qname, hint, key, questionImage, isImageQuestion);
         Answer = answer;
         AnswerImage = answerImage;
         this.isImageChoice = isImageChoice;
@@ -35,16 +37,12 @@ public class MultipleChoiceQuestion extends Question {
         AnswerImage = answerImage;
     }
 
-    public boolean isImageChoice() {
+    public boolean getIsImageChoice() {
         return isImageChoice;
     }
 
-    public void setImageChoice(boolean imageChoice) {
+    public void setIsImageChoice(boolean imageChoice) {
         isImageChoice = imageChoice;
     }
 
-    @Override
-    public boolean checkAnswer(String answer) {
-        return answer.equals(key);
-    }
 }

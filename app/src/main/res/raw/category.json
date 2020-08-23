@@ -3,21 +3,21 @@
     "id": 0,
     "name": "Vietnam",
     "filename": [
-      "VietnamMap",
-      "VietnamLanguage",
-      "VietnamCapital",
-      "VietnamHeight",
-      "VietnamFood"
+      "vietnammapq",
+      "vietnamlanguage",
+      "vietnamcapital",
+      "vietnamheight",
+      "vietnamfood"
     ]
   },
   {
     "id": 1,
     "name": "Denmark",
     "filename": [
-      "DenmarkFlagQ",
-      "DenmarkNEWS",
-      "DenmarkVehicle",
-      "DenmarkTax"
+      "denmarkflagq",
+      "denmarknews",
+      "denmarkvehicle",
+      "denmarktax"
     ]
   }
 ]

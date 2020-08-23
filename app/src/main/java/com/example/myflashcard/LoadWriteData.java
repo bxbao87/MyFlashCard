@@ -1,10 +1,9 @@
 package com.example.myflashcard;
 
 import android.content.Context;
-import android.content.res.Resources;
+import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,37 +22,66 @@ import java.util.Scanner;
 
 public class LoadWriteData {
     private Context context;
-    private String userCategoryFilename ="userCategory.json";
+    private String userCategoryFilename ="usercategory.json";
 
     public LoadWriteData(Context context)
     {
         this.context = context;
     }
 
-    public ArrayList<Categories> loadUserCategories(){
-        return loadCategories(getUserFileContent(userCategoryFilename));
-    }
-    public ArrayList<Categories> loadSystemCategories(){
-        return loadCategories(getSystemFileContent(R.raw.category));
-    }
 
-    public Question loadUserQuestion(String filename){
-        return loadQuestion(getUserFileContent(filename));
-    }
-    public Question loadSystemQuestion(String filename){
-        int resource = context.getResources().getIdentifier(
-                filename,"raw",context.getPackageName());
-        return loadQuestion(getSystemFileContent(resource));
-    }
-
-    public void createQuestion(Categories categories, Question question, String imagePath){
+    public void createQuestion(int categoryID, Question question, Bitmap image){
         try {
-            String filename=addMoreQuestion2Category(categories);
+            String filename=addMoreQuestion2Category(categoryID);
+            String imagePath = saveToInternalStorage(filename, image);
             writeQuestionFile(filename,writeQuestionJson(question, imagePath).toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+    public ArrayList<Categories> loadAllCategories(){
+        ArrayList<Categories> categoriesArrayList = loadSystemCategories();
+        categoriesArrayList.addAll(loadUserCategories());
+        return categoriesArrayList;
+    }
+    public Question LoadPlayQuestion(String filename){
+        if(filename.contains(".json"))
+            return loadUserQuestion(filename);
+        return loadSystemQuestion(filename);
+    }
+
+    private boolean checkFileExists(){
+        File file = context.getFileStreamPath(userCategoryFilename);
+        return file.exists();
+    }
+
+    private ArrayList<Categories> loadUserCategories(){
+        if(checkFileExists()==false) {
+            try {
+                ArrayList<Categories> categoriesArrayList=null;
+                categoriesArrayList=loadCategories(getSystemFileContent(R.raw.usercategory));
+
+                writeCategoryFile(writeCategoryJson(categoriesArrayList).toString());
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+        }
+        return loadCategories(getUserFileContent(userCategoryFilename));
+    }
+    private ArrayList<Categories> loadSystemCategories(){
+        return loadCategories(getSystemFileContent(R.raw.category));
+    }
+
+    private Question loadUserQuestion(String filename){
+        return loadQuestion(getUserFileContent(filename));
+    }
+    private Question loadSystemQuestion(String filename){
+        int resource = context.getResources().getIdentifier(
+                filename,"raw",context.getPackageName());
+        return loadQuestion(getSystemFileContent(resource));
+    }
+
 
     private String readFile(String filename) throws FileNotFoundException {
         FileInputStream fis = context.openFileInput(filename);
@@ -81,14 +109,16 @@ public class LoadWriteData {
         return content;
     }
     private String getSystemFileContent(int resource){
-        Scanner scan = new Scanner(
-                context.getResources().openRawResource(resource));
+
+        Scanner scan = new Scanner(context.getResources().openRawResource(resource));
+
         String content = ""; // read entire file
         while (scan.hasNextLine()) {
             String line = scan.nextLine();
             content += line;
         }
         scan.close();
+
         return content;
     }
 
@@ -114,14 +144,14 @@ public class LoadWriteData {
             for(int j=0;j<arrayFile.length();++j){
                 listFileName.add(arrayFile.getString(j));
             }
-            Categories categories = new Categories(name,listFileName,id);
+            Categories categories = new Categories(id,name,listFileName);
             categoriesArrayList.add(categories);
         }
 
         return categoriesArrayList;
     }
 
-    public Question loadQuestion(String content) {
+    private Question loadQuestion(String content) {
         Question question = null;
         try {
             question = parseQuestion(content);
@@ -138,13 +168,18 @@ public class LoadWriteData {
         boolean isImageQuestion = jsonObject.getBoolean("isImageQuestion");
         String questionImagePath = jsonObject.getString("questionImagePath");
         Bitmap questionImage=null;
-        if(questionImagePath.contains(".json"))
-            questionImage = BitmapFactory.decodeFile(questionImagePath);
+        if(questionImagePath.contains(".jpg")) {
+            File imgFile = new  File(questionImagePath);
+            if(imgFile.exists()){
+                questionImage = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            }
+        }
         else {
             int resource = context.getResources().getIdentifier(
                     questionImagePath,"raw",context.getPackageName());
             questionImage = BitmapFactory.decodeResource(context.getResources(),resource);
         }
+
         String hint = jsonObject.getString("hint");
         String key = jsonObject.getString("key");
 
@@ -159,22 +194,29 @@ public class LoadWriteData {
             boolean isImageChoice = jsonObject.getBoolean("isImageChoice");
             JSONArray answerPath = jsonObject.getJSONArray("answerImagePath");
             ArrayList<Bitmap> answerImages = new ArrayList<>();
+
             for(int i=0;i<answerPath.length();++i){
-                answerImages.add(BitmapFactory.decodeFile(answerPath.getString(i)));
+                if(answerPath.getString(i).contains(".jpg"))
+                    answerImages.add(BitmapFactory.decodeFile(answerPath.getString(i)));
+                else{
+                    int resource = context.getResources().getIdentifier(
+                           answerPath.getString(i),"raw",context.getPackageName());
+                    answerImages.add(BitmapFactory.decodeResource(context.getResources(),resource));
+                }
             }
 
-            q = new MultipleChoiceQuestion(question,hint,key,questionImage,isImageQuestion,
+            q = new MultipleChoiceQuestion(type,question,hint,key,questionImage,isImageQuestion,
                     listAnswers,answerImages,isImageChoice);
         }
         else {
-            q = new SingleAnswerQuestion(question,hint,key,questionImage,isImageQuestion,"");
+            q = new SingleAnswerQuestion(type,question,hint,key,questionImage,isImageQuestion,"");
         }
         return q;
     }
 
     private JSONObject writeQuestionJson(Question question, String imagePath) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("type",1);
+        jsonObject.put("type",question.getType());
         jsonObject.put("question",question.getQname());
         jsonObject.put("isImageQuestion",question.getIsImageQuestion());
         jsonObject.put("questionImagePath",imagePath);
@@ -186,7 +228,7 @@ public class LoadWriteData {
         JSONArray jsonArray = new JSONArray();
         for(int i=0;i<categoriesArrayList.size();++i){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id",categoriesArrayList.get(i).getId());
+            jsonObject.put("id",categoriesArrayList.get(i).getCategoryID());
             jsonObject.put("name",categoriesArrayList.get(i).getName());
             //jsonObject.put("filename",categoriesArrayList.get(i).getListQuestions());
 
@@ -219,25 +261,18 @@ public class LoadWriteData {
             e.printStackTrace();
         }
     }
-    private String addMoreQuestion2Category(Categories categories){
-        String filename="";
+    private String addMoreQuestion2Category(int categoryID) {
+        String filename = "";
         ArrayList<Categories> categoriesArrayList = loadCategories(
                 getUserFileContent(userCategoryFilename));
 
-        int id = categories.getId();
-        if(id>=categoriesArrayList.size()){
-            filename=categories.getName().toLowerCase()+"0.json";
-            ArrayList<String> listFile = new ArrayList<>();
-            listFile.add(filename);
-            categories.setListQuestions(listFile);
-            categoriesArrayList.add(categories);
-        }
-        else {
-            Categories category = categoriesArrayList.get(id);
-            ArrayList<String> listFile = category.getListQuestions();
-            filename = category.getName() + listFile.size() + ".json";
-            listFile.add(filename);
-        }
+        Categories category = categoriesArrayList.get(categoryID);
+        ArrayList<String> listFile = category.getListQuestions();
+        if (listFile == null)
+            listFile = new ArrayList<>();
+        filename = category.getName().split(" ")[1].toLowerCase() + listFile.size() + ".json";
+        listFile.add(filename);
+
         try {
             writeCategoryFile(writeCategoryJson(categoriesArrayList).toString());
         } catch (JSONException e) {
@@ -246,5 +281,35 @@ public class LoadWriteData {
 
         return filename;
     }
+    private String saveToInternalStorage(String filename, Bitmap bitmapImage){
+        if(bitmapImage==null)
+            return "";
+        ContextWrapper cw = new ContextWrapper(context);
+
+        String retFilename = filename.split(".json")[0]+".jpg";
+
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+
+        File mypath=new File(directory,retFilename);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath()+'/'+retFilename;
+    }
+
 
 }
