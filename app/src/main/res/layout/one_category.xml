@@ -11,8 +11,10 @@
         android:text="Category"
         android:textSize="26sp"
         android:textColor="#ffff"
-        android:background="#8640C4FF"
+        android:layout_marginLeft="20dp"
         android:gravity="center_vertical"
         />
+
+    <!--android:background="#8640C4FF"-->
 
 </RelativeLayout>
