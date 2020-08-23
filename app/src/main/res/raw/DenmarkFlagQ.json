@@ -1,0 +1,21 @@
+{
+  "type": 0,
+  "question": "Which one is Denmark flag?",
+  "isImageQuestion": true,
+  "questionImagePath": "DenmarkView",
+  "answer": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "isImageChoice": true,
+  "answerImagePath": [
+    "FinlandFlag",
+    "IcelandFlag",
+    "NorwayFlag",
+    "DenmarkFlag"
+  ],
+  "hint": "Hmm, their flag is mainly dark red !",
+  "key": "D"
+}

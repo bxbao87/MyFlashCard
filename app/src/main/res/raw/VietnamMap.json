@@ -1,0 +1,21 @@
+{
+  "type": 0,
+  "question": "Find out Vietnam",
+  "isImageQuestion": false,
+  "questionImagePath": "",
+  "answer": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "isImageChoice": true,
+  "answerImagePath": [
+    "MalaysiaMap",
+    "JapanMap",
+    "VietnamMap",
+    "PhilippinesMap"
+  ],
+  "hint": "Vietnam country have the shape of S !",
+  "key": "C"
+}

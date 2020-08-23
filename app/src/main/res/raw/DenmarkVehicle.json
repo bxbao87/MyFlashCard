@@ -1,0 +1,16 @@
+{
+  "type": 0,
+  "question": "What is the main kind of transportation in Denmark ?",
+  "isImageQuestion": true,
+  "questionImagePath": "TeslaCar",
+  "answer": [
+    "Bus and subway",
+    "Gas Car",
+    "Electric Car",
+    "Motobike"
+  ],
+  "isImageChoice": false,
+  "answerImagePath": [],
+  "hint": "Tesla production is quite popular here !",
+  "key": "Electric Car"
+}

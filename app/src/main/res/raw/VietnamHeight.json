@@ -1,0 +1,16 @@
+{
+  "type": 0,
+  "question": "What is the average height of Vietnamese (male-female) in centimeter ?",
+  "isImageQuestion": false,
+  "questionImagePath": "",
+  "answer": [
+    "153 - 163",
+    "138 - 153",
+    "168 - 179",
+    "165 - 172"
+  ],
+  "isImageChoice": false,
+  "answerImagePath": [],
+  "hint": "In general, Vietnamese's height is approximately 160cm",
+  "key": "153 - 163"
+}
