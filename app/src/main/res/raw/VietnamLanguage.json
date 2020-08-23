@@ -1,0 +1,16 @@
+{
+  "type": 0,
+  "question": "What is the main and official language in Vienam?",
+  "isImageQuestion": true,
+  "questionImagePath": "VietnamFlag",
+  "answer": [
+    "Vietnamese",
+    "Chinese",
+    "English",
+    "Russian"
+  ],
+  "isImageChoice": false,
+  "answerImagePath": [],
+  "hint": "",
+  "key": "Vietnamese"
+}
